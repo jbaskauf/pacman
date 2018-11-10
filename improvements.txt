@@ -1,0 +1,21 @@
+The status of our program:
+Most of the aspects of the game that we were hoping to implement were successful. PacMan
+moves correctly and as expected, eats dots and ghosts, ghosts move in a (minimally) intelligent
+way and can eat PacMan, score and level are tracked and displayed. Users can play 3 different
+levels and can start new games.
+
+We are aware of at least one bug. When PacMan is going off the board (to be able to wrap 
+around to the other side of the board), if you hit the UP or DOWN key while he is in the 
+last square before wrapping around, PacMan and ghosts freeze because an ArrayIndexOutOfBounds 
+exception is thrown. But you can resume the game by simply pressing LEFT or RIGHT key again.
+We think this happens because once we started accounting for the last direction PacMan was
+moving in, it attempts to generate the potential location resulting from moving up/down 
+(direction != lastDirection). But when it needs to wrap around, it reaches index 0 and 21, 
+so even though PacMan would never successfully be able to go up or down there, it still
+tries to generate this location. We couldn't figure out exactly where this problem was
+originating (possibly in the setGoingOffscreenNewLocation() method), but we decided that
+it was more important to debug/improve other situations of gameplay that arise more frequently.
+
+The next improvements we'd like to make are allowing users to have multiple lives, having 
+some text appear over the game board (such as "LEVEL UP" or points gained when ghosts are eaten),
+possible a welcome screen or high score page, and improving the algorithm for the ghosts' movement.
